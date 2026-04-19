@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutBoxd | O seu Letterboxd do Futebol</title>
+    <style>
+        /* A SUA PALETA DE CORES DO APP EXTRAÍDA DO REACT NATIVE */
+        :root {
+            --bg: #0A0F14;
+            --surface: #111B26;
+            --surfaceEl: #1A2634;
+            --accent: #10B981;
+            --accentDark: #047857;
+            --textMain: #F8FAFC;
+            --textSub: #94A3B8;
+            --divider: #1E2D3D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--textMain);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAVEGAÇÃO */
+        nav {
+            padding: 24px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--divider);
+            background-color: rgba(10, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--textMain);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span { color: var(--accent); }
+
+        .nav-links a {
+            color: var(--textSub);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* HERO SECTION (Topo) */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 150px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .hero-content { max-width: 500px; }
+
+        .tag {
+            display: inline-block;
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        p {
+            color: var(--textSub);
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 16px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--accentDark);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        /* MOCKUP DO CELULAR */
+        .mockup-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .phone-frame {
+            width: 300px;
+            height: 600px;
+            background-color: var(--surface);
+            border-radius: 40px;
+            border: 8px solid var(--surfaceEl);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 0; width: 120px; height: 25px;
+            background-color: var(--surfaceEl);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        /* Imagem de placeholder - Troque pelo print do seu app! */
+        .phone-screen {
+            width: 100%; height: 100%;
+            background-color: var(--bg);
+            /* background-image: url('sua-screenshot-aqui.jpg'); */
+            background-size: cover;
+            background-position: center;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* FEATURES (Funcionalidades) */
+        .features {
+            background-color: var(--surface);
+            padding: 80px 5%;
+            border-top: 1px solid var(--divider);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--bg);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--divider);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--textMain);
+        }
+
+        .card p { margin-bottom: 0; font-size: 15px; }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-content { margin-bottom: 60px; }
+            .mockup-container { justify-content: center; }
+            h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Fut<span>Boxd</span></a>
+        <div class="nav-links">
+            <a href="https://github.com/raphaelcborges/FutBoxd" target="_blank">Ver no GitHub</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="tag">Versão Beta 1.0</span>
+            <h1>Acompanhe, avalie e discuta o futebol.</h1>
+            <p>O seu diário definitivo de partidas. Veja estatísticas ao vivo, avalie os jogadores e dê a sua nota para o juizão após o apito final.</p>
+            <a href="https://fut-boxd.vercel.app/" target="_blank" class="btn">Acessar Web App</a>
+        </div>
+        
+        <div class="mockup-container">
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <p style="color: var(--textMuted); font-size: 14px;">[Sua Screenshot Aqui]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="card">
+                <h3>⚡ Tempo Real</h3>
+                <p>Acompanhe os lances, gols e cartões da rodada do Brasileirão e das principais ligas europeias instantaneamente.</p>
+            </div>
+            <div class="card">
+                <h3>⭐ Comunidade</h3>
+                <p>O jogo foi cinema ou deu sono? Deixe sua avaliação de 1 a 5 estrelas e veja a média de notas da comunidade.</p>
+            </div>
+            <div class="card">
+                <h3>🏆 Herói e Vilão</h3>
+                <p>Eleja o protagonista da partida e quem afundou o time, construindo a narrativa de cada jogo no seu perfil.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
