@@ -167,7 +167,7 @@
     .trust { display: flex; align-items: center; gap: 9px; margin-top: 17px; color: var(--teal); font-size: 13px; }
     .trust span { color: rgba(255,255,255,.22); }
 
-    .product-stage { position: relative; min-height: 610px; display: grid; place-items: center; }
+    .product-stage { position: relative; min-height: 590px; display: grid; place-items: center; }
     .halo {
       position: absolute;
       width: 430px;
@@ -182,8 +182,8 @@
     .phone {
       position: relative;
       z-index: 3;
-      width: 300px;
-      height: 570px;
+      width: 310px;
+      height: 548px;
       padding: 10px;
       border-radius: 48px;
       background: linear-gradient(145deg, #41375e, #211a3d 60%);
@@ -204,7 +204,13 @@
       background: #1b1230;
     }
     .phone-screen { width: 100%; height: 100%; overflow: hidden; border-radius: 39px; background: #201b43; }
-    .phone-screen > img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; }
+    .phone-screen > img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+    }
     .phone-fallback { height: 100%; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 35px; text-align: center; }
     .phone-fallback img { width: 92px; }
     .phone-fallback p { color: var(--muted); font-size: 13px; }
@@ -219,17 +225,17 @@
       box-shadow: 0 20px 50px rgba(10,5,22,.35);
       animation: float 5s ease-in-out infinite;
     }
-    .rating-card { top: 86px; right: -18px; width: 172px; padding: 15px 17px; }
+    .rating-card { top: 88px; right: -5px; width: 172px; padding: 15px 17px; }
     .rating-card small, .stat-card small { display: block; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
     .rating-line { display: flex; align-items: center; gap: 7px; margin-top: 5px; }
     .rating-line strong { color: var(--accent); font-size: 25px; line-height: 1; }
     .stars { color: var(--accent); font-size: 12px; letter-spacing: 1px; }
-    .hero-card { left: -10px; bottom: 115px; width: 190px; padding: 15px; animation-delay: -2.5s; }
+    .hero-card { left: -2px; bottom: 112px; width: 190px; padding: 15px; animation-delay: -2.5s; }
     .player { display: flex; align-items: center; gap: 11px; }
     .player-badge { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 12px; color: #1c112e; background: var(--accent); font-size: 20px; }
     .player small { color: var(--teal); font-size: 10px; font-weight: 700; text-transform: uppercase; }
     .player strong { display: block; font-size: 14px; }
-    .stat-card { right: 2px; bottom: 45px; padding: 13px 17px; animation-delay: -1s; }
+    .stat-card { right: 5px; bottom: 38px; padding: 13px 17px; animation-delay: -1s; }
     .stat-card strong { font-size: 20px; }
     @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 
