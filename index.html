@@ -321,68 +321,76 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
 
-    /* ── Demo interativa da nota ──────────────────────────────────────────
-       O card de nota do heroi deixou de ser enfeite: da para arrastar o mouse
-       (ou o dedo) sobre as estrelas e sentir o gesto central do produto antes
-       de criar conta. Meia estrela, como no app. */
-    .rating-card { width: 200px; }
+    /* ── Demo interativa ─────────────────────────────────────────────────
+       Antes isto vivia dentro do card flutuante de 172px, no canto do palco.
+       Alvo de ~90x20px, estrelas de 15px, e o card ainda balançava sozinho --
+       lia como enfeite, e em repouso era identico ao anterior. Ninguem
+       descobria que dava para interagir.
+
+       Agora e um bloco proprio na coluna do texto, onde a leitura ja passa,
+       com estrela grande e convite explicito. */
+    .try {
+      margin: 26px 0 18px;
+      padding: 16px 18px 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(39,32,68,.55);
+      max-width: 380px;
+    }
+    .try-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .try-eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 1.6px;
+      text-transform: uppercase; color: var(--teal);
+    }
+    .try-hint { font-size: 11px; color: var(--muted); }
+    .try-body { display: flex; align-items: center; gap: 14px; margin-top: 10px; flex-wrap: wrap; }
+    .try-readout { display: flex; align-items: baseline; gap: 8px; }
+    .try-readout strong { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 30px; line-height: 1; }
+    .try-readout span { font-size: 12px; font-weight: 500; color: var(--teal); }
+
     .rate-track {
       position: relative;
       cursor: pointer;
       touch-action: none;
       line-height: 1;
-      font-size: 15px;
-      letter-spacing: 2px;
-      padding: 2px 0;
+      font-size: 30px;          /* alvo grande: da para acertar com o dedo */
+      letter-spacing: 4px;
+      padding: 4px 2px;
       outline: none;
+      flex: 0 0 auto;
     }
-    .rate-track:focus-visible { box-shadow: 0 0 0 2px var(--accent); border-radius: 4px; }
-    .rate-base { color: rgba(255,255,255,.22); }
+    .rate-track:focus-visible { box-shadow: 0 0 0 2px var(--accent); border-radius: 6px; }
+    .rate-base { color: rgba(255,255,255,.2); }
     .rate-fill {
-      position: absolute;
-      inset: 2px auto 2px 0;
-      overflow: hidden;
-      white-space: nowrap;
-      color: var(--accent);
-      width: 90%;
+      position: absolute; inset: 4px auto 4px 2px;
+      overflow: hidden; white-space: nowrap;
+      color: var(--accent); width: 90%;
       transition: width .08s linear;
     }
-    .rate-word {
-      display: block;
-      margin-top: 7px;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--teal);
-      min-height: 15px;
-    }
     .rate-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: 10px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
-      opacity: 0;
-      transform: translateY(4px);
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+      font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;
+      opacity: 0; transform: translateY(4px);
       transition: opacity .25s ease, transform .25s ease;
       pointer-events: none;
     }
-    .rate-cta svg { width: 13px; height: 13px; }
-    /* So aparece depois que a pessoa experimenta: convite, nao anuncio. */
-    .rating-card.rated .rate-cta { opacity: 1; transform: none; pointer-events: auto; }
-    .rating-card.rated { animation: none; }
-    @keyframes ratePop { 50% { transform: scale(1.06); } }
-    .rating-card.pop .rate-track { animation: ratePop .32s ease; }
+    .rate-cta svg { width: 14px; height: 14px; }
+    .try.rated .rate-cta { opacity: 1; transform: none; pointer-events: auto; }
+    .try.rated .try-hint { opacity: 0; }
+    @keyframes ratePop { 50% { transform: scale(1.05); } }
+    .try.pop .rate-track { animation: ratePop .3s ease; }
 
-    /* Inclinacao suave do palco ao mover o mouse. Puro transform, sem layout. */
+    /* Pulso discreto ate a primeira interacao: sinaliza que da para mexer. */
+    @keyframes tryPulse { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
+    .try:not(.rated) .try-hint { animation: tryPulse 2.4s ease-in-out infinite; }
+
     .product-stage { transform-style: preserve-3d; will-change: transform; }
     .product-stage.tilt { transition: transform .18s ease-out; }
 
+    @media (max-width: 680px) { .try { max-width: 100%; } }
     @media (prefers-reduced-motion: reduce) {
       .rate-fill, .rate-cta, .product-stage.tilt { transition: none; }
-      .rating-card.pop .rate-track { animation: none; }
+      .try.pop .rate-track, .try:not(.rated) .try-hint { animation: none; }
     }
   </style>
 </head>
@@ -420,29 +428,38 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M18 13l-6 6-6-6"/></svg>
             </a>
           </div>
-          <p class="trust">Grátis <span>•</span> Direto no navegador <span>•</span> A partir de 13 anos</p>
-        </div>
-
-        <div class="product-stage" aria-label="Demonstração do aplicativo Futrem">
-          <div class="halo"></div>
-          <div class="float-card rating-card" id="demoCard">
-            <small>Sua nota</small>
-            <div class="rating-line">
-              <strong id="demoValue">4,5</strong>
+          <div class="try" id="demoCard">
+            <div class="try-head">
+              <span class="try-eyebrow">Experimente aqui</span>
+              <span class="try-hint" id="demoHint">arraste nas estrelas</span>
+            </div>
+            <div class="try-body">
               <div class="rate-track" id="demoTrack"
                    role="slider" tabindex="0"
-                   aria-label="Experimente dar uma nota"
+                   aria-label="Experimente dar uma nota a uma partida"
                    aria-valuemin="0.5" aria-valuemax="5" aria-valuenow="4.5"
                    aria-valuetext="4,5 - De ficar de pe">
                 <span class="rate-base">★★★★★</span>
                 <span class="rate-fill" id="demoFill">★★★★★</span>
               </div>
+              <div class="try-readout">
+                <strong id="demoValue">4,5</strong>
+                <span id="demoWord">De ficar de pé</span>
+              </div>
             </div>
-            <span class="rate-word" id="demoWord">De ficar de pé</span>
             <a class="rate-cta" id="demoCta" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
-              Avaliar de verdade
+              Agora vale de verdade — abrir o Futrem
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
+          </div>
+          <p class="trust">Grátis <span>•</span> Direto no navegador <span>•</span> A partir de 13 anos</p>
+        </div>
+
+        <div class="product-stage" aria-label="Demonstração do aplicativo Futrem">
+          <div class="halo"></div>
+          <div class="float-card rating-card">
+            <small>Sua nota</small>
+            <div class="rating-line"><strong>4,5</strong><span class="stars">★★★★½</span></div>
           </div>
           <div class="float-card hero-card">
             <div class="player">
