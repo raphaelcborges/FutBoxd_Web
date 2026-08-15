@@ -320,6 +320,70 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
+
+    /* ── Demo interativa da nota ──────────────────────────────────────────
+       O card de nota do heroi deixou de ser enfeite: da para arrastar o mouse
+       (ou o dedo) sobre as estrelas e sentir o gesto central do produto antes
+       de criar conta. Meia estrela, como no app. */
+    .rating-card { width: 200px; }
+    .rate-track {
+      position: relative;
+      cursor: pointer;
+      touch-action: none;
+      line-height: 1;
+      font-size: 15px;
+      letter-spacing: 2px;
+      padding: 2px 0;
+      outline: none;
+    }
+    .rate-track:focus-visible { box-shadow: 0 0 0 2px var(--accent); border-radius: 4px; }
+    .rate-base { color: rgba(255,255,255,.22); }
+    .rate-fill {
+      position: absolute;
+      inset: 2px auto 2px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      color: var(--accent);
+      width: 90%;
+      transition: width .08s linear;
+    }
+    .rate-word {
+      display: block;
+      margin-top: 7px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--teal);
+      min-height: 15px;
+    }
+    .rate-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .25s ease, transform .25s ease;
+      pointer-events: none;
+    }
+    .rate-cta svg { width: 13px; height: 13px; }
+    /* So aparece depois que a pessoa experimenta: convite, nao anuncio. */
+    .rating-card.rated .rate-cta { opacity: 1; transform: none; pointer-events: auto; }
+    .rating-card.rated { animation: none; }
+    @keyframes ratePop { 50% { transform: scale(1.06); } }
+    .rating-card.pop .rate-track { animation: ratePop .32s ease; }
+
+    /* Inclinacao suave do palco ao mover o mouse. Puro transform, sem layout. */
+    .product-stage { transform-style: preserve-3d; will-change: transform; }
+    .product-stage.tilt { transition: transform .18s ease-out; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rate-fill, .rate-cta, .product-stage.tilt { transition: none; }
+      .rating-card.pop .rate-track { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -361,9 +425,24 @@
 
         <div class="product-stage" aria-label="Demonstração do aplicativo Futrem">
           <div class="halo"></div>
-          <div class="float-card rating-card">
+          <div class="float-card rating-card" id="demoCard">
             <small>Sua nota</small>
-            <div class="rating-line"><strong>4,5</strong><span class="stars">★★★★½</span></div>
+            <div class="rating-line">
+              <strong id="demoValue">4,5</strong>
+              <div class="rate-track" id="demoTrack"
+                   role="slider" tabindex="0"
+                   aria-label="Experimente dar uma nota"
+                   aria-valuemin="0.5" aria-valuemax="5" aria-valuenow="4.5"
+                   aria-valuetext="4,5 - De ficar de pe">
+                <span class="rate-base">★★★★★</span>
+                <span class="rate-fill" id="demoFill">★★★★★</span>
+              </div>
+            </div>
+            <span class="rate-word" id="demoWord">De ficar de pé</span>
+            <a class="rate-cta" id="demoCta" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
+              Avaliar de verdade
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
           </div>
           <div class="float-card hero-card">
             <div class="player">
@@ -460,5 +539,104 @@
       </div>
     </div>
   </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // Adjetivos de 0,5 a 5,0. A escala e a mesma do app: meia em meia estrela.
+  var PALAVRAS = {
+    0.5: 'Show de horrores',
+    1.0: 'Passei vergonha',
+    1.5: 'Melhor ter dormido',
+    2.0: 'Fraco',
+    2.5: 'Jogo truncado',
+    3.0: 'Deu pro gasto',
+    3.5: 'Bom jogo',
+    4.0: 'Jogaço',
+    4.5: 'De ficar de pé',
+    5.0: 'Cinema absoluto'
+  };
+
+  var card  = document.getElementById('demoCard');
+  var track = document.getElementById('demoTrack');
+  var fill  = document.getElementById('demoFill');
+  var valEl = document.getElementById('demoValue');
+  var wordEl = document.getElementById('demoWord');
+  if (!card || !track) return;
+
+  var travado = 4.5;   // valor confirmado
+  var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function pinta(nota) {
+    fill.style.width = (nota / 5 * 100) + '%';
+    valEl.textContent = nota.toFixed(1).replace('.', ',');
+    wordEl.textContent = PALAVRAS[nota] || '';
+    track.setAttribute('aria-valuenow', String(nota));
+    track.setAttribute('aria-valuetext', nota.toFixed(1).replace('.', ',') + ' - ' + (PALAVRAS[nota] || ''));
+  }
+
+  function notaEm(clientX) {
+    var r = track.getBoundingClientRect();
+    var p = (clientX - r.left) / r.width;
+    // Arredonda para cima em passos de meia estrela, com piso em 0,5.
+    return Math.min(5, Math.max(0.5, Math.ceil(p * 10) / 2));
+  }
+
+  track.addEventListener('pointermove', function (e) {
+    if (e.pointerType === 'touch') return;   // no toque so vale o toque em si
+    pinta(notaEm(e.clientX));
+  });
+
+  track.addEventListener('pointerleave', function () { pinta(travado); });
+
+  track.addEventListener('pointerdown', function (e) {
+    e.preventDefault();
+    travado = notaEm(e.clientX);
+    pinta(travado);
+    card.classList.add('rated');
+    if (!semMovimento) {
+      card.classList.remove('pop');
+      void card.offsetWidth;            // reinicia a animacao
+      card.classList.add('pop');
+    }
+  });
+
+  // Teclado: seta muda de meia em meia, como um slider de verdade.
+  track.addEventListener('keydown', function (e) {
+    var passo = (e.key === 'ArrowRight' || e.key === 'ArrowUp') ? 0.5
+              : (e.key === 'ArrowLeft' || e.key === 'ArrowDown') ? -0.5 : 0;
+    if (!passo) return;
+    e.preventDefault();
+    travado = Math.min(5, Math.max(0.5, travado + passo));
+    pinta(travado);
+    card.classList.add('rated');
+  });
+
+  pinta(travado);
+
+  // ── Inclinacao do palco ────────────────────────────────────────────────
+  var stage = document.querySelector('.product-stage');
+  var fino = window.matchMedia('(pointer: fine)').matches;
+  if (stage && fino && !semMovimento) {
+    var pedido = null;
+    stage.classList.add('tilt');
+    stage.addEventListener('pointermove', function (e) {
+      if (pedido) return;                  // no maximo um ajuste por quadro
+      pedido = requestAnimationFrame(function () {
+        pedido = null;
+        var r = stage.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        stage.style.transform =
+          'perspective(1100px) rotateY(' + (x * 5).toFixed(2) + 'deg) rotateX(' + (-y * 5).toFixed(2) + 'deg)';
+      });
+    });
+    stage.addEventListener('pointerleave', function () {
+      stage.style.transform = '';
+    });
+  }
+})();
+</script>
 </body>
 </html>
