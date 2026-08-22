@@ -1,327 +1,353 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Futrem | O seu diário do futebol</title>
-  <meta name="description" content="Registre as partidas que você assistiu, dê notas e transforme sua temporada de torcedor em história.">
-  <meta name="theme-color" content="#1c112e">
-  <link rel="icon" href="logo.png">
-  <meta property="og:title" content="Futrem | O seu diário do futebol">
-  <meta property="og:description" content="Registre partidas, dê suas notas e construa a história da sua vida como torcedor.">
-  <meta property="og:image" content="logo.png">
-  <meta property="og:type" content="website">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="application-name" content="Futrem" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Futrem" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-icon-192.png" />
+    <title>Futrem | O seu diário do futebol</title>
+    <meta name="description" content="Registre as partidas que você assistiu, dê notas e transforme sua temporada de torcedor em história.">
+    <meta name="theme-color" content="#1c112e">
+    <link rel="icon" href="logo.png">
+    <meta property="og:title" content="Futrem | O seu diário do futebol">
+    <meta property="og:description" content="Registre partidas, dê suas notas e construa a história da sua vida como torcedor.">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:type" content="website">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #1c112e;
-      --bg-deep: #140b24;
-      --surface: #272044;
-      --surface-light: #312851;
-      --accent: #fcf660;
-      --teal: #38b9ae;
-      --text: #fff;
-      --sub: #cbc7da;
-      --muted: #918aa6;
-      --border: rgba(255,255,255,.1);
-      --max: 1180px;
-    }
+    <style>
+      :root {
+        --bg: #1c112e;
+        --bg-deep: #140b24;
+        --surface: #272044;
+        --surface-light: #312851;
+        --accent: #fcf660;
+        --teal: #38b9ae;
+        --text: #fff;
+        --sub: #cbc7da;
+        --muted: #918aa6;
+        --border: rgba(255,255,255,.1);
+        --max: 1180px;
+      }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      color: var(--text);
-      background: var(--bg);
-      font-family: "Outfit", sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; }
-    .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        color: var(--text);
+        background: var(--bg);
+        font-family: "Outfit", sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; }
+      .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
 
-    nav {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 20;
-      background: rgba(28,17,46,.72);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .nav-inner {
-      min-height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .brand img { width: 38px; height: 38px; object-fit: contain; }
-    .wordmark { font-size: 23px; font-weight: 700; letter-spacing: -1px; }
-    .wordmark em { color: var(--teal); font-style: normal; }
-    .nav-links { display: flex; align-items: center; gap: 8px; }
-    .nav-link {
-      color: var(--sub);
-      text-decoration: none;
-      padding: 9px 12px;
-      font-size: 14px;
-      font-weight: 600;
-      transition: color .2s;
-    }
-    .nav-link:hover { color: var(--text); }
+      nav {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 20;
+        background: rgba(28,17,46,.72);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(255,255,255,.06);
+      }
+      .nav-inner {
+        min-height: 74px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+      .brand img { width: 38px; height: 38px; object-fit: contain; }
+      .wordmark { font-size: 23px; font-weight: 700; letter-spacing: -1px; }
+      .wordmark em { color: var(--teal); font-style: normal; }
+      .nav-links { display: flex; align-items: center; gap: 8px; }
+      .nav-link {
+        color: var(--sub);
+        text-decoration: none;
+        padding: 9px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: color .2s;
+      }
+      .nav-link:hover { color: var(--text); }
 
-    .btn {
-      min-height: 50px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 0 23px;
-      border-radius: 13px;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 700;
-      transition: transform .2s, box-shadow .2s, background .2s;
-    }
-    .btn svg { width: 17px; height: 17px; }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary {
-      color: #1c112e;
-      background: var(--accent);
-      box-shadow: 0 14px 34px rgba(252,246,96,.12);
-    }
-    .btn-primary:hover { box-shadow: 0 17px 40px rgba(252,246,96,.22); }
-    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: rgba(255,255,255,.035); }
-    .btn-ghost:hover { background: rgba(255,255,255,.08); }
-    .nav-cta { min-height: 44px; border-radius: 11px; }
+      .btn {
+        min-height: 50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 0 23px;
+        border-radius: 13px;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 700;
+        transition: transform .2s, box-shadow .2s, background .2s;
+      }
+      .btn svg { width: 17px; height: 17px; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn-primary {
+        color: #1c112e;
+        background: var(--accent);
+        box-shadow: 0 14px 34px rgba(252,246,96,.12);
+      }
+      .btn-primary:hover { box-shadow: 0 17px 40px rgba(252,246,96,.22); }
+      .btn-ghost { color: var(--text); border: 1px solid var(--border); background: rgba(255,255,255,.035); }
+      .btn-ghost:hover { background: rgba(255,255,255,.08); }
+      .nav-cta { min-height: 44px; border-radius: 11px; }
 
-    .hero-shell {
-      position: relative;
-      min-height: 860px;
-      display: grid;
-      align-items: center;
-      padding: 124px 0 74px;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    .hero-shell::before {
-      content: "";
-      position: absolute;
-      z-index: -2;
-      width: 680px;
-      height: 680px;
-      right: -70px;
-      top: 90px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(56,185,174,.22), rgba(56,185,174,.05) 46%, transparent 70%);
-      filter: blur(4px);
-    }
-    .pitch-lines {
-      position: absolute;
-      z-index: -3;
-      inset: 0;
-      opacity: .12;
-      background-image:
-        linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
-      background-size: 110px 110px;
-      mask-image: linear-gradient(to bottom, black, transparent 88%);
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(390px, .95fr);
-      align-items: center;
-      gap: 60px;
-    }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 25px;
-      padding: 6px 12px;
-      border: 1px solid rgba(252,246,96,.3);
-      border-radius: 99px;
-      color: var(--accent);
-      background: rgba(252,246,96,.08);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-    h1 {
-      max-width: 660px;
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(64px, 7.4vw, 104px);
-      font-weight: 400;
-      line-height: .88;
-      letter-spacing: .3px;
-    }
-    h1 span { color: var(--accent); }
-    .lead { max-width: 570px; margin: 28px 0 32px; color: var(--sub); font-size: 18px; line-height: 1.7; }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
-    .trust { display: flex; align-items: center; gap: 9px; margin-top: 17px; color: var(--teal); font-size: 13px; }
-    .trust span { color: rgba(255,255,255,.22); }
+      .hero-shell {
+        position: relative;
+        min-height: 860px;
+        display: grid;
+        align-items: center;
+        padding: 124px 0 74px;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .hero-shell::before {
+        content: "";
+        position: absolute;
+        z-index: -2;
+        width: 680px;
+        height: 680px;
+        right: -70px;
+        top: 90px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(56,185,174,.22), rgba(56,185,174,.05) 46%, transparent 70%);
+        filter: blur(4px);
+      }
+      .pitch-lines {
+        position: absolute;
+        z-index: -3;
+        inset: 0;
+        opacity: .12;
+        background-image:
+          linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+        background-size: 110px 110px;
+        mask-image: linear-gradient(to bottom, black, transparent 88%);
+      }
 
-    .product-stage { position: relative; min-height: 590px; display: grid; place-items: center; }
-    .halo {
-      position: absolute;
-      width: 430px;
-      height: 430px;
-      border-radius: 50%;
-      border: 1px solid rgba(56,185,174,.16);
-      box-shadow: inset 0 0 90px rgba(56,185,174,.08), 0 0 100px rgba(56,185,174,.08);
-    }
-    .halo::before, .halo::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.06); border-radius: 50%; }
-    .halo::before { inset: 37px; }
-    .halo::after { inset: 82px; }
-    .phone {
-      position: relative;
-      z-index: 3;
-      width: 310px;
-      height: 548px;
-      padding: 10px;
-      border-radius: 48px;
-      background: linear-gradient(145deg, #41375e, #211a3d 60%);
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 40px 80px rgba(7,3,16,.52), -18px 18px 60px rgba(56,185,174,.1);
-      transform: rotate(2deg);
-    }
-    .phone::before {
-      content: "";
-      position: absolute;
-      z-index: 5;
-      top: 10px;
-      left: 50%;
-      width: 98px;
-      height: 23px;
-      transform: translateX(-50%);
-      border-radius: 0 0 15px 15px;
-      background: #1b1230;
-    }
-    .phone-screen { width: 100%; height: 100%; overflow: hidden; border-radius: 39px; background: #201b43; }
-    .phone-screen > img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: contain;
-      object-position: center;
-    }
-    .phone-fallback { height: 100%; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 35px; text-align: center; }
-    .phone-fallback img { width: 92px; }
-    .phone-fallback p { color: var(--muted); font-size: 13px; }
+      /* Video background for hero */
+      .hero-video {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+      }
+      .hero-video video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.4;
+      }
 
-    .float-card {
-      position: absolute;
-      z-index: 6;
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 17px;
-      background: rgba(44,35,75,.86);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 20px 50px rgba(10,5,22,.35);
-      animation: float 5s ease-in-out infinite;
-    }
-    .rating-card { top: 88px; right: -5px; width: 172px; padding: 15px 17px; }
-    .rating-card small, .stat-card small { display: block; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
-    .rating-line { display: flex; align-items: center; gap: 7px; margin-top: 5px; }
-    .rating-line strong { color: var(--accent); font-size: 25px; line-height: 1; }
-    .stars { color: var(--accent); font-size: 12px; letter-spacing: 1px; }
-    .hero-card { left: -2px; bottom: 112px; width: 190px; padding: 15px; animation-delay: -2.5s; }
-    .player { display: flex; align-items: center; gap: 11px; }
-    .player-badge { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 12px; color: #1c112e; background: var(--accent); font-size: 20px; }
-    .player small { color: var(--teal); font-size: 10px; font-weight: 700; text-transform: uppercase; }
-    .player strong { display: block; font-size: 14px; }
-    .stat-card { right: 5px; bottom: 38px; padding: 13px 17px; animation-delay: -1s; }
-    .stat-card strong { font-size: 20px; }
-    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(390px, .95fr);
+        align-items: center;
+        gap: 60px;
+        position: relative;
+        z-index: 2;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 25px;
+        padding: 6px 12px;
+        border: 1px solid rgba(252,246,96,.3);
+        border-radius: 99px;
+        color: var(--accent);
+        background: rgba(252,246,96,.08);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+      h1 {
+        max-width: 660px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(64px, 7.4vw, 104px);
+        font-weight: 400;
+        line-height: .88;
+        letter-spacing: .3px;
+      }
+      h1 span { color: var(--accent); }
+      .lead { max-width: 570px; margin: 28px 0 32px; color: var(--sub); font-size: 18px; line-height: 1.7; }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+      .trust { display: flex; align-items: center; gap: 9px; margin-top: 17px; color: var(--teal); font-size: 13px; }
+      .trust span { color: rgba(255,255,255,.22); }
 
-    .marquee { position: relative; z-index: 2; overflow: hidden; border-block: 1px solid var(--border); background: var(--accent); color: #1c112e; }
-    .marquee-track { width: max-content; display: flex; gap: 30px; padding: 12px 0; font-family: "Bebas Neue"; font-size: 19px; letter-spacing: 1.3px; animation: move 28s linear infinite; }
-    .marquee-track span::after { content: "✦"; margin-left: 30px; }
-    @keyframes move { to { transform: translateX(-50%); } }
+      .product-stage { position: relative; min-height: 590px; display: grid; place-items: center; }
+      .halo {
+        position: absolute;
+        width: 430px;
+        height: 430px;
+        border-radius: 50%;
+        border: 1px solid rgba(56,185,174,.16);
+        box-shadow: inset 0 0 90px rgba(56,185,174,.08), 0 0 100px rgba(56,185,174,.08);
+      }
+      .halo::before, .halo::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.06); border-radius: 50%; }
+      .halo::before { inset: 37px; }
+      .halo::after { inset: 82px; }
+      .phone {
+        position: relative;
+        z-index: 3;
+        width: 310px;
+        height: 548px;
+        padding: 10px;
+        border-radius: 48px;
+        background: linear-gradient(145deg, #41375e, #211a3d 60%);
+        border: 1px solid rgba(255,255,255,.18);
+        box-shadow: 0 40px 80px rgba(7,3,16,.52), -18px 18px 60px rgba(56,185,174,.1);
+        transform: rotate(2deg);
+      }
+      .phone::before {
+        content: "";
+        position: absolute;
+        z-index: 5;
+        top: 10px;
+        left: 50%;
+        width: 98px;
+        height: 23px;
+        transform: translateX(-50%);
+        border-radius: 0 0 15px 15px;
+        background: #1b1230;
+      }
+      .phone-screen { width: 100%; height: 100%; overflow: hidden; border-radius: 39px; background: #201b43; }
+      .phone-screen > img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+        object-position: center;
+      }
+      .phone-fallback { height: 100%; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 35px; text-align: center; }
+      .phone-fallback img { width: 92px; }
+      .phone-fallback p { color: var(--muted); font-size: 13px; }
 
-    .features { position: relative; padding: 110px 0; background: var(--bg-deep); overflow: hidden; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 55px; }
-    .eyebrow { margin-bottom: 9px; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; }
-    .section-title { max-width: 650px; font-family: "Bebas Neue"; font-size: clamp(45px, 5vw, 67px); font-weight: 400; line-height: .95; }
-    .section-copy { max-width: 390px; color: var(--sub); }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .step {
-      position: relative;
-      min-height: 320px;
-      padding: 30px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
-      transition: transform .25s, border-color .25s;
-    }
-    .step:hover { transform: translateY(-6px); border-color: rgba(56,185,174,.42); }
-    .step-num { position: absolute; right: 18px; top: -30px; color: rgba(255,255,255,.035); font-family: "Bebas Neue"; font-size: 150px; line-height: 1; }
-    .step-icon { width: 49px; height: 49px; display: grid; place-items: center; margin-bottom: 70px; border-radius: 15px; color: var(--accent); background: rgba(252,246,96,.1); border: 1px solid rgba(252,246,96,.15); }
-    .step-icon svg { width: 23px; height: 23px; }
-    .step h3 { position: relative; margin-bottom: 10px; font-size: 21px; }
-    .step p { position: relative; color: var(--sub); font-size: 15px; }
+      .float-card {
+        position: absolute;
+        z-index: 6;
+        border: 1px solid rgba(255,255,255,.13);
+        border-radius: 17px;
+        background: rgba(44,35,75,.86);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 20px 50px rgba(10,5,22,.35);
+        animation: float 5s ease-in-out infinite;
+      }
+      .rating-card { top: 88px; right: -5px; width: 172px; padding: 15px 17px; }
+      .rating-card small, .stat-card small { display: block; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+      .rating-line { display: flex; align-items: center; gap: 7px; margin-top: 5px; }
+      .rating-line strong { color: var(--accent); font-size: 25px; line-height: 1; }
+      .stars { color: var(--accent); font-size: 12px; letter-spacing: 1px; }
+      .hero-card { left: -2px; bottom: 112px; width: 190px; padding: 15px; animation-delay: -2.5s; }
+      .player { display: flex; align-items: center; gap: 11px; }
+      .player-badge { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 12px; color: #1c112e; background: var(--accent); font-size: 20px; }
+      .player small { color: var(--teal); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+      .player strong { display: block; font-size: 14px; }
+      .stat-card { right: 5px; bottom: 38px; padding: 13px 17px; animation-delay: -1s; }
+      .stat-card strong { font-size: 20px; }
+      @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 
-    .details { padding: 110px 0; background: linear-gradient(180deg, var(--bg), #211535); }
-    .details-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; align-items: start; }
-    .sticky-copy { position: sticky; top: 120px; }
-    .sticky-copy .section-title { margin-bottom: 20px; }
-    .sticky-copy > p { color: var(--sub); max-width: 430px; }
-    .feature-list { border-top: 1px solid var(--border); }
-    .feature-row { display: grid; grid-template-columns: 50px 1fr; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); }
-    .feature-row > span { color: var(--teal); font-family: "Bebas Neue"; font-size: 25px; }
-    .feature-row h3 { margin-bottom: 5px; font-size: 17px; }
-    .feature-row p { color: var(--sub); font-size: 14px; }
+      .marquee { position: relative; z-index: 2; overflow: hidden; border-block: 1px solid var(--border); background: var(--accent); color: #1c112e; }
+      .marquee-track { width: max-content; display: flex; gap: 30px; padding: 12px 0; font-family: "Bebas Neue"; font-size: 19px; letter-spacing: 1.3px; animation: move 28s linear infinite; }
+      .marquee-track span::after { content: "✦"; margin-left: 30px; }
+      @keyframes move { to { transform: translateX(-50%); } }
 
-    .final-cta { padding: 72px 0; background: var(--accent); color: #1c112e; }
-    .final-inner { display: flex; align-items: center; justify-content: space-between; gap: 45px; }
-    .final-cta h2 { max-width: 720px; font-family: "Bebas Neue"; font-size: clamp(48px, 6vw, 76px); font-weight: 400; line-height: .92; }
-    .final-cta .btn { flex-shrink: 0; color: white; background: #1c112e; box-shadow: 0 16px 35px rgba(28,17,46,.22); }
+      .features { position: relative; padding: 110px 0; background: var(--bg-deep); overflow: hidden; }
+      .section-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 55px; }
+      .eyebrow { margin-bottom: 9px; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; }
+      .section-title { max-width: 650px; font-family: "Bebas Neue"; font-size: clamp(45px, 5vw, 67px); font-weight: 400; line-height: .95; }
+      .section-copy { max-width: 390px; color: var(--sub); }
+      .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .step {
+        position: relative;
+        min-height: 320px;
+        padding: 30px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+        transition: transform .25s, border-color .25s;
+      }
+      .step:hover { transform: translateY(-6px); border-color: rgba(56,185,174,.42); }
+      .step-num { position: absolute; right: 18px; top: -30px; color: rgba(255,255,255,.035); font-family: "Bebas Neue"; font-size: 150px; line-height: 1; }
+      .step-icon { width: 49px; height: 49px; display: grid; place-items: center; margin-bottom: 70px; border-radius: 15px; color: var(--accent); background: rgba(252,246,96,.1); border: 1px solid rgba(252,246,96,.15); }
+      .step-icon svg { width: 23px; height: 23px; }
+      .step h3 { position: relative; margin-bottom: 10px; font-size: 21px; }
+      .step p { position: relative; color: var(--sub); font-size: 15px; }
 
-    footer { padding: 32px 0; background: var(--bg-deep); }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 25px; color: var(--muted); font-size: 13px; }
-    .footer-links { display: flex; gap: 20px; }
-    .footer-links a { color: var(--sub); text-decoration: none; }
-    .footer-links a:hover { color: var(--accent); }
+      .details { padding: 110px 0; background: linear-gradient(180deg, var(--bg), #211535); }
+      .details-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; align-items: start; }
+      .sticky-copy { position: sticky; top: 120px; }
+      .sticky-copy .section-title { margin-bottom: 20px; }
+      .sticky-copy > p { color: var(--sub); max-width: 430px; }
+      .feature-list { border-top: 1px solid var(--border); }
+      .feature-row { display: grid; grid-template-columns: 50px 1fr; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); }
+      .feature-row > span { color: var(--teal); font-family: "Bebas Neue"; font-size: 25px; }
+      .feature-row h3 { margin-bottom: 5px; font-size: 17px; }
+      .feature-row p { color: var(--sub); font-size: 14px; }
 
-    @media (max-width: 950px) {
-      .hero-shell { min-height: auto; padding-top: 150px; }
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .hero-copy { display: grid; justify-items: center; }
-      .product-stage { width: min(100%, 560px); margin-inline: auto; }
-      .steps { grid-template-columns: 1fr; }
-      .step { min-height: 240px; }
-      .step-icon { margin-bottom: 38px; }
-      .details-layout { grid-template-columns: 1fr; gap: 50px; }
-      .sticky-copy { position: static; }
-    }
-    @media (max-width: 680px) {
-      .wrap { width: min(100% - 32px, var(--max)); }
-      .nav-link { display: none; }
-      .nav-cta { min-height: 41px; padding-inline: 16px; }
-      h1 { font-size: clamp(58px, 19vw, 82px); }
-      .lead { font-size: 16px; }
-      .cta-row { width: 100%; }
-      .cta-row .btn { width: 100%; }
-      .product-stage { min-height: 560px; transform: scale(.88); margin-block: -30px; }
-      .rating-card { right: -14px; }
-      .hero-card { left: -18px; }
-      .section-head, .final-inner, .footer-inner { align-items: flex-start; flex-direction: column; }
-      .section-copy { display: none; }
-      .features, .details { padding: 82px 0; }
-      .final-cta .btn { width: 100%; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-    }
+      .final-cta { padding: 72px 0; background: var(--accent); color: #1c112e; }
+      .final-inner { display: flex; align-items: center; justify-content: space-between; gap: 45px; }
+      .final-cta h2 { max-width: 720px; font-family: "Bebas Neue"; font-size: clamp(48px, 6vw, 76px); font-weight: 400; line-height: .92; }
+      .final-cta .btn { flex-shrink: 0; color: white; background: #1c112e; box-shadow: 0 16px 35px rgba(28,17,46,.22); }
 
-    /* ── Demo interativa ─────────────────────────────────────────────────
+      footer { padding: 32px 0; background: var(--bg-deep); }
+      .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 25px; color: var(--muted); font-size: 13px; }
+      .footer-links { display: flex; gap: 20px; }
+      .footer-links a { color: var(--sub); text-decoration: none; }
+      .footer-links a:hover { color: var(--accent); }
+
+      @media (max-width: 950px) {
+        .hero-shell { min-height: auto; padding-top: 150px; }
+        .hero { grid-template-columns: 1fr; text-align: center; }
+        .hero-copy { display: grid; justify-items: center; }
+        .product-stage { width: min(100%, 560px); margin-inline: auto; }
+        .steps { grid-template-columns: 1fr; }
+        .step { min-height: 240px; }
+        .step-icon { margin-bottom: 38px; }
+        .details-layout { grid-template-columns: 1fr; gap: 50px; }
+        .sticky-copy { position: static; }
+      }
+      @media (max-width: 680px) {
+        .wrap { width: min(100% - 32px, var(--max)); }
+        .nav-link { display: none; }
+        .nav-cta { min-height: 41px; padding-inline: 16px; }
+        h1 { font-size: clamp(58px, 19vw, 82px); }
+        .lead { font-size: 16px; }
+        .cta-row { width: 100%; }
+        .cta-row .btn { width: 100%; }
+        .product-stage { min-height: 560px; transform: scale(.88); margin-block: -30px; }
+        .rating-card { right: -14px; }
+        .hero-card { left: -18px; }
+        .section-head, .final-inner, .footer-inner { align-items: flex-start; flex-direction: column; }
+        .section-copy { display: none; }
+        .features, .details { padding: 82px 0; }
+        .final-cta .btn { width: 100%; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation: none !important; transition: none !important; }
+      }
+
+      /* ── Demo interativa ─────────────────────────────────────────────────
        Antes isto vivia dentro do card flutuante de 172px, no canto do palco.
        Alvo de ~90x20px, estrelas de 15px, e o card ainda balançava sozinho --
        lia como enfeite, e em repouso era identico ao anterior. Ninguem
@@ -329,233 +355,239 @@
 
        Agora e um bloco proprio na coluna do texto, onde a leitura ja passa,
        com estrela grande e convite explicito. */
-    .try {
-      margin: 26px 0 18px;
-      padding: 16px 18px 14px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: rgba(39,32,68,.55);
-      max-width: 380px;
-    }
-    .try-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-    .try-eyebrow {
-      font-size: 10px; font-weight: 600; letter-spacing: 1.6px;
-      text-transform: uppercase; color: var(--teal);
-    }
-    .try-hint { font-size: 11px; color: var(--muted); }
-    .try-body { display: flex; align-items: center; gap: 14px; margin-top: 10px; flex-wrap: wrap; }
-    .try-readout { display: flex; align-items: baseline; gap: 8px; }
-    .try-readout strong { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 30px; line-height: 1; }
-    .try-readout span { font-size: 12px; font-weight: 500; color: var(--teal); }
+      .try {
+        margin: 26px 0 18px;
+        padding: 16px 18px 14px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(39,32,68,.55);
+        max-width: 380px;
+      }
+      .try-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+      .try-eyebrow {
+        font-size: 10px; font-weight: 600; letter-spacing: 1.6px;
+        text-transform: uppercase; color: var(--teal);
+      }
+      .try-hint { font-size: 11px; color: var(--muted); }
+      .try-body { display: flex; align-items: center; gap: 14px; margin-top: 10px; flex-wrap: wrap; }
+      .try-readout { display: flex; align-items: baseline; gap: 8px; }
+      .try-readout strong { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 30px; line-height: 1; }
+      .try-readout span { font-size: 12px; font-weight: 500; color: var(--teal); }
 
-    .rate-track {
-      position: relative;
-      cursor: pointer;
-      touch-action: none;
-      line-height: 1;
-      font-size: 30px;          /* alvo grande: da para acertar com o dedo */
-      letter-spacing: 4px;
-      padding: 4px 2px;
-      outline: none;
-      flex: 0 0 auto;
-    }
-    .rate-track:focus-visible { box-shadow: 0 0 0 2px var(--accent); border-radius: 6px; }
-    .rate-base { color: rgba(255,255,255,.2); }
-    .rate-fill {
-      position: absolute; inset: 4px auto 4px 2px;
-      overflow: hidden; white-space: nowrap;
-      color: var(--accent); width: 90%;
-      transition: width .08s linear;
-    }
-    .rate-cta {
-      display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
-      font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;
-      opacity: 0; transform: translateY(4px);
-      transition: opacity .25s ease, transform .25s ease;
-      pointer-events: none;
-    }
-    .rate-cta svg { width: 14px; height: 14px; }
-    .try.rated .rate-cta { opacity: 1; transform: none; pointer-events: auto; }
-    .try.rated .try-hint { opacity: 0; }
-    @keyframes ratePop { 50% { transform: scale(1.05); } }
-    .try.pop .rate-track { animation: ratePop .3s ease; }
+      .rate-track {
+        position: relative;
+        cursor: pointer;
+        touch-action: none;
+        line-height: 1;
+        font-size: 30px;          /* alvo grande: da para acertar com o dedo */
+        letter-spacing: 4px;
+        padding: 4px 2px;
+        outline: none;
+        flex: 0 0 auto;
+      }
+      .rate-track:focus-visible { box-shadow: 0 0 0 2px var(--accent); border-radius: 6px; }
+      .rate-base { color: rgba(255,255,255,.2); }
+      .rate-fill {
+        position: absolute; inset: 4px auto 4px 2px;
+        overflow: hidden; white-space: nowrap;
+        color: var(--accent); width: 90%;
+        transition: width .08s linear;
+      }
+      .rate-cta {
+        display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+        font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;
+        opacity: 0; transform: translateY(4px);
+        transition: opacity .25s ease, transform .25s ease;
+        pointer-events: none;
+      }
+      .rate-cta svg { width: 14px; height: 14px; }
+      .try.rated .rate-cta { opacity: 1; transform: none; pointer-events: auto; }
+      .try.rated .try-hint { opacity: 0; }
+      @keyframes ratePop { 50% { transform: scale(1.05); } }
+      .try.pop .rate-track { animation: ratePop .3s ease; }
 
-    /* Pulso discreto ate a primeira interacao: sinaliza que da para mexer. */
-    @keyframes tryPulse { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
-    .try:not(.rated) .try-hint { animation: tryPulse 2.4s ease-in-out infinite; }
+      /* Pulso discreto ate a primeira interacao: sinaliza que da para mexer. */
+      @keyframes tryPulse { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
+      .try:not(.rated) .try-hint { animation: tryPulse 2.4s ease-in-out infinite; }
 
-    .product-stage { transform-style: preserve-3d; will-change: transform; }
-    .product-stage.tilt { transition: transform .18s ease-out; }
+      .product-stage { transform-style: preserve-3d; will-change: transform; }
+      .product-stage.tilt { transition: transform .18s ease-out; }
 
-    @media (max-width: 680px) { .try { max-width: 100%; } }
-    @media (prefers-reduced-motion: reduce) {
-      .rate-fill, .rate-cta, .product-stage.tilt { transition: none; }
-      .try.pop .rate-track, .try:not(.rated) .try-hint { animation: none; }
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <div class="wrap nav-inner">
-      <a href="#inicio" class="brand" aria-label="Futrem, página inicial">
-        <img src="logo.png" alt="">
-        <span class="wordmark">fu<em>trem</em></span>
-      </a>
-      <div class="nav-links">
-        <a class="nav-link" href="#como-funciona">Como funciona</a>
-        <a class="nav-link" href="#recursos">Recursos</a>
-        <a class="nav-link" href="https://github.com/raphaelcborges/FutBoxd" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn btn-primary nav-cta" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">Abrir o Futrem</a>
-      </div>
-    </div>
-  </nav>
-
-  <main>
-    <section class="hero-shell" id="inicio">
-      <div class="pitch-lines"></div>
-      <div class="wrap hero">
-        <div class="hero-copy">
-          <span class="tag">Beta aberto</span>
-          <h1>O seu diário<br>do <span>futebol.</span></h1>
-          <p class="lead">Registre cada partida, dê suas notas e construa a história da sua vida como torcedor.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
-              Abrir o Futrem
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="btn btn-ghost" href="#como-funciona">
-              Ver como funciona
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M18 13l-6 6-6-6"/></svg>
-            </a>
-          </div>
-          <div class="try" id="demoCard">
-            <div class="try-head">
-              <span class="try-eyebrow">Experimente aqui</span>
-              <span class="try-hint" id="demoHint">arraste nas estrelas</span>
-            </div>
-            <div class="try-body">
-              <div class="rate-track" id="demoTrack"
-                   role="slider" tabindex="0"
-                   aria-label="Experimente dar uma nota a uma partida"
-                   aria-valuemin="0.5" aria-valuemax="5" aria-valuenow="4.5"
-                   aria-valuetext="4,5 - De ficar de pe">
-                <span class="rate-base">★★★★★</span>
-                <span class="rate-fill" id="demoFill">★★★★★</span>
-              </div>
-              <div class="try-readout">
-                <strong id="demoValue">4,5</strong>
-                <span id="demoWord">De ficar de pé</span>
-              </div>
-            </div>
-            <a class="rate-cta" id="demoCta" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
-              Agora vale de verdade — abrir o Futrem
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
-          <p class="trust">Grátis <span>•</span> Direto no navegador <span>•</span> A partir de 13 anos</p>
-        </div>
-
-        <div class="product-stage" aria-label="Demonstração do aplicativo Futrem">
-          <div class="halo"></div>
-          <div class="float-card rating-card">
-            <small>Sua nota</small>
-            <div class="rating-line"><strong>4,5</strong><span class="stars">★★★★½</span></div>
-          </div>
-          <div class="float-card hero-card">
-            <div class="player">
-              <span class="player-badge">★</span>
-              <div><small>Craque do jogo</small><strong>Você escolhe</strong></div>
-            </div>
-          </div>
-          <div class="float-card stat-card">
-            <small>Sua temporada</small>
-            <strong>12 jogos</strong>
-          </div>
-          <div class="phone">
-            <div class="phone-screen">
-              <img src="image1.jpeg" alt="Tela inicial do Futrem" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='image1.png';}else{this.parentElement.innerHTML='&lt;div class=&quot;phone-fallback&quot;&gt;&lt;img src=&quot;logo.png&quot; alt=&quot;&quot;&gt;&lt;p&gt;Seu diário de futebol, jogo a jogo.&lt;/p&gt;&lt;/div&gt;';}">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Assista</span><span>Registre</span><span>Avalie</span><span>Relembre</span><span>Assista</span><span>Registre</span><span>Avalie</span><span>Relembre</span><span>Assista</span><span>Registre</span><span>Avalie</span><span>Relembre</span>
-      </div>
-    </div>
-
-    <section class="features" id="como-funciona">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Simples como um passe</p>
-            <h2 class="section-title">Cada jogo vira parte da sua história.</h2>
-          </div>
-          <p class="section-copy">Do apito inicial à sua retrospectiva: três passos para nunca mais esquecer uma partida.</p>
-        </div>
-        <div class="steps">
-          <article class="step">
-            <span class="step-num">01</span>
-            <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div>
-            <h3>Encontre a partida</h3>
-            <p>Busque o jogo que você assistiu entre campeonatos do Brasil e do mundo.</p>
-          </article>
-          <article class="step">
-            <span class="step-num">02</span>
-            <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></div>
-            <h3>Dê o seu veredito</h3>
-            <p>Avalie o jogo, o árbitro, os jogadores e até a beleza dos gols.</p>
-          </article>
-          <article class="step">
-            <span class="step-num">03</span>
-            <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
-            <h3>Construa seu diário</h3>
-            <p>Acompanhe suas estatísticas e relembre a temporada pelos seus próprios olhos.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="details" id="recursos">
-      <div class="wrap details-layout">
-        <div class="sticky-copy">
-          <p class="eyebrow">Muito além do placar</p>
-          <h2 class="section-title">Futebol do seu jeito.</h2>
-          <p>O resultado conta o que aconteceu. O Futrem guarda como você viveu cada partida.</p>
-        </div>
-        <div class="feature-list">
-          <article class="feature-row"><span>01</span><div><h3>Diário de partidas</h3><p>Registre o que assistiu, escreva sua resenha e marque quando esteve no estádio.</p></div></article>
-          <article class="feature-row"><span>02</span><div><h3>Nota pra tudo</h3><p>Avalie a partida, o árbitro, os jogadores e a beleza do gol na mesma escala.</p></div></article>
-          <article class="feature-row"><span>03</span><div><h3>Futebol em tempo real</h3><p>Acompanhe gols, cartões e escalações das principais competições.</p></div></article>
-          <article class="feature-row"><span>04</span><div><h3>Sua temporada</h3><p>Descubra quantos jogos viu, sua nota média e quais times marcaram o seu ano.</p></div></article>
-          <article class="feature-row"><span>05</span><div><h3>Herói e vilão</h3><p>Eleja quem decidiu e quem comprometeu. A narrativa de cada jogo é sua.</p></div></article>
-          <article class="feature-row"><span>06</span><div><h3>Lembrete no apito final</h3><p>Receba um aviso para avaliar enquanto a emoção da partida ainda está quente.</p></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="final-cta">
-      <div class="wrap final-inner">
-        <h2>Seu próximo jogo merece um registro.</h2>
-        <a class="btn" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
-          Criar meu diário grátis
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      @media (max-width: 680px) { .try { max-width: 100%; } }
+      @media (prefers-reduced-motion: reduce) {
+        .rate-fill, .rate-cta, .product-stage.tilt { transition: none; }
+        .try.pop .rate-track, .try:not(.rated) .try-hint { animation: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="wrap nav-inner">
+        <a href="#inicio" class="brand" aria-label="Futrem, página inicial">
+          <img src="logo.png" alt="">
+          <span class="wordmark">fu<em>trem</em></span>
         </a>
+        <div class="nav-links">
+          <a class="nav-link" href="#como-funciona">Como funciona</a>
+          <a class="nav-link" href="#recursos">Recursos</a>
+          <a class="btn btn-primary nav-cta" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">Abrir o Futrem</a>
+        </div>
       </div>
-    </section>
-  </main>
+    </nav>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <p>Futrem · Projeto independente, sem vínculo com clubes ou ligas.</p>
-      <div class="footer-links">
-        <a href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">Abrir o app</a>
-        <a href="https://github.com/raphaelcborges/FutBoxd" target="_blank" rel="noopener">GitHub</a>
+    <main>
+      <section class="hero-shell" id="inicio">
+        <div class="pitch-lines"></div>
+        <!-- Video background -->
+        <div class="hero-video">
+          <video autoplay muted loop playsinline>
+            <source src="/vc_nao_entendeu_quando_eu_fal.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="wrap hero">
+          <div class="hero-copy">
+            <span class="tag">Beta aberto</span>
+            <h1>O seu diário<br>do <span>futebol.</span></h1>
+            <p class="lead">Registre cada partida, dê suas notas e construa a história da sua vida como torcedor.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
+                Abrir o Futrem
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a class="btn btn-ghost" href="#como-funciona">
+                Ver como funciona
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M18 13l-6 6-6-6"/></svg>
+              </a>
+            </div>
+            <div class="try" id="demoCard">
+              <div class="try-head">
+                <span class="try-eyebrow">Experimente aqui</span>
+                <span class="try-hint" id="demoHint">arraste nas estrelas</span>
+              </div>
+              <div class="try-body">
+                <div class="rate-track" id="demoTrack"
+                     role="slider" tabindex="0"
+                     aria-label="Experimente dar uma nota a uma partida"
+                     aria-valuemin="0.5" aria-valuemax="5" aria-valuenow="4.5"
+                     aria-valuetext="4,5 - De ficar de pé">
+                  <span class="rate-base">★★★★★</span>
+                  <span class="rate-fill" id="demoFill">★★★★★</span>
+                </div>
+                <div class="try-readout">
+                  <strong id="demoValue">4,5</strong>
+                  <span id="demoWord">De ficar de pé</span>
+                </div>
+              </div>
+              <a class="rate-cta" id="demoCta" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
+                Agora vale de verdade — abrir o Futrem
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+            <p class="trust">Grátis <span>•</span> Direto no navegador <span>•</span> A partir de 13 anos</p>
+          </div>
+
+          <div class="product-stage" aria-label="Demonstração do aplicativo Futrem">
+            <div class="halo"></div>
+            <div class="float-card rating-card">
+              <small>Sua nota</small>
+              <div class="rating-line"><strong>4,5</strong><span class="stars">★★★★½</span></div>
+            </div>
+            <div class="float-card hero-card">
+              <div class="player">
+                <span class="player-badge">★</span>
+                <div><small>Craque do jogo</small><strong>Você escolhe</strong></div>
+              </div>
+            </div>
+            <div class="float-card stat-card">
+              <small>Sua temporada</small>
+              <strong>12 jogos</strong>
+            </div>
+            <div class="phone">
+              <div class="phone-screen">
+                <img src="image1.jpeg" alt="Tela inicial do Futrem" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='image1.png';}else{this.parentElement.innerHTML='<div class="phone-fallback"><img src="logo.png" alt=""><p>Seu diário de futebol, jogo a jogo.</p></div>';}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>Assista</span><span>Registre</span><span>Avalie</span><span>Relembre</span><span>Assista</span><span>Registre</span><span>Avalie</span><span>Relembre</span><span>Assista</span><span>Registre</span><span>Avalie</span><span>Relembre</span>
+        </div>
       </div>
-    </div>
-  </footer>
+
+      <section class="features" id="como-funciona">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Simples como um passe</p>
+              <h2 class="section-title">Cada jogo vira parte da sua história.</h2>
+            </div>
+            <p class="section-copy">Do apito inicial à sua retrospectiva: três passos para nunca mais esquecer uma partida.</p>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <span class="step-num">01</span>
+              <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div>
+              <h3>Encontre a partida</h3>
+              <p>Busque o jogo que você assistiu entre campeonatos do Brasil e do mundo.</p>
+            </article>
+            <article class="step">
+              <span class="step-num">02</span>
+              <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></div>
+              <h3>Dê o seu veredito</h3>
+              <p>Avalie o jogo, o árbitro, os jogadores e até a beleza dos gols.</p>
+            </article>
+            <article class="step">
+              <span class="step-num">03</span>
+              <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
+              <h3>Construa seu diário</h3>
+              <p>Acompanhe suas estatísticas e relembre a temporada pelos seus próprios olhos.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="details" id="recursos">
+        <div class="wrap details-layout">
+          <div class="sticky-copy">
+            <p class="eyebrow">Muito além do placar</p>
+            <h2 class="section-title">Futebol do seu jeito.</h2>
+            <p>O resultado conta o que aconteceu. O Futrem guarda como você viveu cada partida.</p>
+          </div>
+          <div class="feature-list">
+            <article class="feature-row"><span>01</span><div><h3>Diário de partidas</h3><p>Registre o que assistiu, escreva sua resenha e marque quando esteve no estádio.</p></div></article>
+            <article class="feature-row"><span>02</span><div><h3>Nota pra tudo</h3><p>Avalie a partida, o árbitro, os jogadores e a beleza do gol na mesma escala.</p></div></article>
+            <article class="feature-row"><span>03</span><div><h3>Futebol em tempo real</h3><p>Acompanhe gols, cartões e escalações das principais competições.</p></div></article>
+            <article class="feature-row"><span>04</span><div><h3>Sua temporada</h3><p>Descubra quantos jogos viu, sua nota média e quais times marcaram o seu ano.</p></div></article>
+            <article class="feature-row"><span>05</span><div><h3>Herói e vilão</h3><p>Eleja quem decidiu e quem comprometeu. A narrativa de cada jogo é sua.</p></div></article>
+            <article class="feature-row"><span>06</span><div><h3>Lembrete no apito final</h3><p>Receba um aviso para avaliar enquanto a emoção da partida ainda está quente.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <div class="wrap final-inner">
+          <h2>Seu próximo jogo merece um registro.</h2>
+          <a class="btn" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
+            Criar meu diário grátis
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <p>Futrem · Projeto independente, sem vínculo com clubes ou ligas.</p>
+        <div class="footer-links">
+          <a href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">Abrir o app</a>
+          <a href="https://github.com/raphaelcborges/FutBoxd" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
 
 <script>
 (function () {
