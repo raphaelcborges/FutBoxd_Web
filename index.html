@@ -346,78 +346,6 @@
         html { scroll-behavior: auto; }
         *, *::before, *::after { animation: none !important; transition: none !important; }
       }
-
-      /* ── Demo interativa ─────────────────────────────────────────────────
-       Antes isto vivia dentro do card flutuante de 172px, no canto do palco.
-       Alvo de ~90x20px, estrelas de 15px, e o card ainda balançava sozinho --
-       lia como enfeite, e em repouso era identico ao anterior. Ninguem
-       descobria que dava para interagir.
-
-       Agora e um bloco proprio na coluna do texto, onde a leitura ja passa,
-       com estrela grande e convite explicito. */
-      .try {
-        margin: 26px 0 18px;
-        padding: 16px 18px 14px;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        background: rgba(39,32,68,.55);
-        max-width: 380px;
-      }
-      .try-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-      .try-eyebrow {
-        font-size: 10px; font-weight: 600; letter-spacing: 1.6px;
-        text-transform: uppercase; color: var(--teal);
-      }
-      .try-hint { font-size: 11px; color: var(--muted); }
-      .try-body { display: flex; align-items: center; gap: 14px; margin-top: 10px; flex-wrap: wrap; }
-      .try-readout { display: flex; align-items: baseline; gap: 8px; }
-      .try-readout strong { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 30px; line-height: 1; }
-      .try-readout span { font-size: 12px; font-weight: 500; color: var(--teal); }
-
-      .rate-track {
-        position: relative;
-        cursor: pointer;
-        touch-action: none;
-        line-height: 1;
-        font-size: 30px;          /* alvo grande: da para acertar com o dedo */
-        letter-spacing: 4px;
-        padding: 4px 2px;
-        outline: none;
-        flex: 0 0 auto;
-      }
-      .rate-track:focus-visible { box-shadow: 0 0 0 2px var(--accent); border-radius: 6px; }
-      .rate-base { color: rgba(255,255,255,.2); }
-      .rate-fill {
-        position: absolute; inset: 4px auto 4px 2px;
-        overflow: hidden; white-space: nowrap;
-        color: var(--accent); width: 90%;
-        transition: width .08s linear;
-      }
-      .rate-cta {
-        display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
-        font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;
-        opacity: 0; transform: translateY(4px);
-        transition: opacity .25s ease, transform .25s ease;
-        pointer-events: none;
-      }
-      .rate-cta svg { width: 14px; height: 14px; }
-      .try.rated .rate-cta { opacity: 1; transform: none; pointer-events: auto; }
-      .try.rated .try-hint { opacity: 0; }
-      @keyframes ratePop { 50% { transform: scale(1.05); } }
-      .try.pop .rate-track { animation: ratePop .3s ease; }
-
-      /* Pulso discreto ate a primeira interacao: sinaliza que da para mexer. */
-      @keyframes tryPulse { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
-      .try:not(.rated) .try-hint { animation: tryPulse 2.4s ease-in-out infinite; }
-
-      .product-stage { transform-style: preserve-3d; will-change: transform; }
-      .product-stage.tilt { transition: transform .18s ease-out; }
-
-      @media (max-width: 680px) { .try { max-width: 100%; } }
-      @media (prefers-reduced-motion: reduce) {
-        .rate-fill, .rate-cta, .product-stage.tilt { transition: none; }
-        .try.pop .rate-track, .try:not(.rated) .try-hint { animation: none; }
-      }
     </style>
   </head>
   <body>
@@ -460,30 +388,6 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M18 13l-6 6-6-6"/></svg>
               </a>
             </div>
-            <div class="try" id="demoCard">
-              <div class="try-head">
-                <span class="try-eyebrow">Experimente aqui</span>
-                <span class="try-hint" id="demoHint">arraste nas estrelas</span>
-              </div>
-              <div class="try-body">
-                <div class="rate-track" id="demoTrack"
-                     role="slider" tabindex="0"
-                     aria-label="Experimente dar uma nota a uma partida"
-                     aria-valuemin="0.5" aria-valuemax="5" aria-valuenow="4.5"
-                     aria-valuetext="4,5 - De ficar de pé">
-                  <span class="rate-base">★★★★★</span>
-                  <span class="rate-fill" id="demoFill">★★★★★</span>
-                </div>
-                <div class="try-readout">
-                  <strong id="demoValue">4,5</strong>
-                  <span id="demoWord">De ficar de pé</span>
-                </div>
-              </div>
-              <a class="rate-cta" id="demoCta" href="https://fut-boxd.vercel.app/" target="_blank" rel="noopener">
-                Agora vale de verdade — abrir o Futrem
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </a>
-            </div>
             <p class="trust">Grátis <span>•</span> Direto no navegador <span>•</span> A partir de 13 anos</p>
           </div>
 
@@ -505,7 +409,7 @@
             </div>
             <div class="phone">
               <div class="phone-screen">
-                <img src="image1.jpeg" alt="Tela inicial do Futrem" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='image1.png';}else{this.parentElement.innerHTML='<div class="phone-fallback"><img src="logo.png" alt=""><p>Seu diário de futebol, jogo a jogo.</p></div>';}">
+                <img src="image1.jpeg" alt="Tela inicial do Futrem" onerror="this.onerror=null;this.src='image1.png';">
               </div>
             </div>
           </div>
@@ -588,104 +492,5 @@
         </div>
       </div>
     </footer>
-
-<script>
-(function () {
-  'use strict';
-
-  // Adjetivos de 0,5 a 5,0. A escala e a mesma do app: meia em meia estrela.
-  var PALAVRAS = {
-    0.5: 'Show de horrores',
-    1.0: 'Passei vergonha',
-    1.5: 'Melhor ter dormido',
-    2.0: 'Fraco',
-    2.5: 'Jogo truncado',
-    3.0: 'Deu pro gasto',
-    3.5: 'Bom jogo',
-    4.0: 'Jogaço',
-    4.5: 'De ficar de pé',
-    5.0: 'Cinema absoluto'
-  };
-
-  var card  = document.getElementById('demoCard');
-  var track = document.getElementById('demoTrack');
-  var fill  = document.getElementById('demoFill');
-  var valEl = document.getElementById('demoValue');
-  var wordEl = document.getElementById('demoWord');
-  if (!card || !track) return;
-
-  var travado = 4.5;   // valor confirmado
-  var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function pinta(nota) {
-    fill.style.width = (nota / 5 * 100) + '%';
-    valEl.textContent = nota.toFixed(1).replace('.', ',');
-    wordEl.textContent = PALAVRAS[nota] || '';
-    track.setAttribute('aria-valuenow', String(nota));
-    track.setAttribute('aria-valuetext', nota.toFixed(1).replace('.', ',') + ' - ' + (PALAVRAS[nota] || ''));
-  }
-
-  function notaEm(clientX) {
-    var r = track.getBoundingClientRect();
-    var p = (clientX - r.left) / r.width;
-    // Arredonda para cima em passos de meia estrela, com piso em 0,5.
-    return Math.min(5, Math.max(0.5, Math.ceil(p * 10) / 2));
-  }
-
-  track.addEventListener('pointermove', function (e) {
-    if (e.pointerType === 'touch') return;   // no toque so vale o toque em si
-    pinta(notaEm(e.clientX));
-  });
-
-  track.addEventListener('pointerleave', function () { pinta(travado); });
-
-  track.addEventListener('pointerdown', function (e) {
-    e.preventDefault();
-    travado = notaEm(e.clientX);
-    pinta(travado);
-    card.classList.add('rated');
-    if (!semMovimento) {
-      card.classList.remove('pop');
-      void card.offsetWidth;            // reinicia a animacao
-      card.classList.add('pop');
-    }
-  });
-
-  // Teclado: seta muda de meia em meia, como um slider de verdade.
-  track.addEventListener('keydown', function (e) {
-    var passo = (e.key === 'ArrowRight' || e.key === 'ArrowUp') ? 0.5
-              : (e.key === 'ArrowLeft' || e.key === 'ArrowDown') ? -0.5 : 0;
-    if (!passo) return;
-    e.preventDefault();
-    travado = Math.min(5, Math.max(0.5, travado + passo));
-    pinta(travado);
-    card.classList.add('rated');
-  });
-
-  pinta(travado);
-
-  // ── Inclinacao do palco ────────────────────────────────────────────────
-  var stage = document.querySelector('.product-stage');
-  var fino = window.matchMedia('(pointer: fine)').matches;
-  if (stage && fino && !semMovimento) {
-    var pedido = null;
-    stage.classList.add('tilt');
-    stage.addEventListener('pointermove', function (e) {
-      if (pedido) return;                  // no maximo um ajuste por quadro
-      pedido = requestAnimationFrame(function () {
-        pedido = null;
-        var r = stage.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - 0.5;
-        var y = (e.clientY - r.top) / r.height - 0.5;
-        stage.style.transform =
-          'perspective(1100px) rotateY(' + (x * 5).toFixed(2) + 'deg) rotateX(' + (-y * 5).toFixed(2) + 'deg)';
-      });
-    });
-    stage.addEventListener('pointerleave', function () {
-      stage.style.transform = '';
-    });
-  }
-})();
-</script>
-</body>
+  </body>
 </html>
